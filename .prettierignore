@@ -1,0 +1,8 @@
+package-lock.json
+package.json
+.vscode/*.*
+.eslintrc.json
+README.md
+src/schema.js
+data
+03.DataAccess/DBContext/config/database.json
