@@ -2,13 +2,10 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable('doitacquancaos', {
-      id: {
+      madoitac: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
-      },
-      madoitac: {
         type: Sequelize.INTEGER
       },
       tendoitac: {

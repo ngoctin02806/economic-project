@@ -2,13 +2,10 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable('dondathangs', {
-      id: {
+      madondathang: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
-      },
-      madondathang: {
         type: Sequelize.INTEGER
       },
       tongsoluong: {

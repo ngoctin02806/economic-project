@@ -2,13 +2,10 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable('nhacungcaps', {
-      id: {
+      manhacungcap: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
-      },
-      manhacungcap: {
         type: Sequelize.INTEGER
       },
       tennhacungcap: {
