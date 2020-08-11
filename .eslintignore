@@ -1,2 +1,6 @@
 node_modules/*
-data
+/01.UI/Group17.WebUI/views/**
+/01.UI/Group17.WebUI/public/assets/js/*.js
+/01.UI/Group17.WebUI/public/assets/css/**/*.js
+/01.UI/Group17.WebUI/public/assets/plugins/**/*.js
+/03.DataAccess/DataAccess/config

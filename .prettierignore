@@ -6,3 +6,5 @@ README.md
 src/schema.js
 data
 03.DataAccess/DBContext/config/database.json
+01.UI/Group17.WebUI/views/**
+01.UI/Group17.WebUI/public/**

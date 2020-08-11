@@ -16,7 +16,7 @@
   },
   "lint-staged": {
     "*.{js,jsx}": [
-      "eslint --no-ignore --fix",
+      "eslint --ignore-pattern '/01.UI/Group17.WebUI/public/assets/plugins/**/*.js' --fix",
       "git add --force"
     ],
     "*.{json,md,graphql}": [

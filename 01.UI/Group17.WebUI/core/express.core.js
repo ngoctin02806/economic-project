@@ -29,7 +29,7 @@ module.exports = () =>
 
       // serve image files
       app.use(
-        '/static/images',
+        '/images',
         express.static(path.resolve(__dirname, '../public/images'))
       );
 
