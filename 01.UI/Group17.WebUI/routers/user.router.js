@@ -3,9 +3,9 @@ const passport = require('passport');
 
 const router = express.Router();
 
-const homeController = require('../controllers/home.controller');
+const userController = require('../controllers/user.controller');
 
-router.get('/dang-nhap', homeController.renderLogin);
+router.get('/dang-nhap', userController.renderLogin);
 
 router.post(
   '/dang-nhap',
@@ -29,5 +29,7 @@ router.get(
     failureRedirect: '/login',
   })
 );
+
+router.get('/dang-xuat', userController.logout);
 
 module.exports = router;
