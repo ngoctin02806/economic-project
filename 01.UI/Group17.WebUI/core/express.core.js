@@ -5,6 +5,10 @@ const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const exhbs = require('express-handlebars');
 const exHbsSection = require('express-handlebars-sections');
+const session = require('express-session');
+const passport = require('passport');
+
+require('./facebook.strategy');
 
 const app = express();
 
@@ -43,18 +47,24 @@ module.exports = () =>
 
       app.set('views', path.resolve(__dirname, '../views'));
 
+      app.use(session({ secret: 'cats' }));
+
       // parse application/x-www-form-urlencoded
       app.use(bodyParser.urlencoded({ extended: false }));
       // parse application/json
       app.use(bodyParser.json());
 
+      app.use(passport.initialize());
+
+      app.use(passport.session());
+
       app.use(morgan('dev'));
 
       // router
-      app.use(router);
+      app.use('/', router);
 
       // catch 404 error
-      app.use((error, req, res, next) => {
+      app.use((req, res, next) => {
         const err = new Error('Resource is not exist');
         err.status = 404;
 

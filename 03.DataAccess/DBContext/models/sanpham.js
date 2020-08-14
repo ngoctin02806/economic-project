@@ -1,7 +1,5 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
+const { Model } = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
   class sanpham extends Model {
     /**
@@ -11,26 +9,28 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      sanpham.hasMany(models.chitietdondathang, {foreignKey: 'ma_sp'});
-      sanpham.hasMany(models.chitietdonnhaphang, {foreignKey: 'ma_sp'});
-      sanpham.hasMany(models.chitiettrahang, {foreignKey: 'ma_sp'});
-      sanpham.hasMany(models.comment, {foreignKey: 'ma_sp'});
-      sanpham.hasMany(models.hinhanh, {foreignKey: 'ma_sp'});
-      sanpham.hasMany(models.thongtinquancao, {foreignKey: 'ma_sp'});
+      sanpham.hasMany(models.chitietdondathang, { foreignKey: 'ma_sp' });
+      sanpham.hasMany(models.chitietdonnhaphang, { foreignKey: 'ma_sp' });
+      sanpham.hasMany(models.chitiettrahang, { foreignKey: 'ma_sp' });
+      sanpham.hasMany(models.comment, { foreignKey: 'ma_sp' });
+      sanpham.hasMany(models.hinhanh, { foreignKey: 'ma_sp' });
+      sanpham.hasMany(models.thongtinquangcao, { foreignKey: 'ma_sp' });
 
-
-      sanpham.belongsTo(models.danhmuc, {foreignKey: 'ma_dm'})
-      sanpham.belongsTo(models.nhacungcap, {foreignKey: 'ma_ncc'})
+      sanpham.belongsTo(models.danhmuc, { foreignKey: 'ma_dm' });
+      sanpham.belongsTo(models.nhacungcap, { foreignKey: 'ma_ncc' });
     }
-  };
-  sanpham.init({
-    masanpham: DataTypes.INTEGER,
-    tensanpham: DataTypes.STRING,
-    giasp: DataTypes.DECIMAL,
-    soluongtong: DataTypes.INTEGER
-  }, {
-    sequelize,
-    modelName: 'sanpham',
-  });
+  }
+  sanpham.init(
+    {
+      masanpham: DataTypes.INTEGER,
+      tensanpham: DataTypes.STRING,
+      giasp: DataTypes.DECIMAL,
+      soluongtong: DataTypes.INTEGER,
+    },
+    {
+      sequelize,
+      modelName: 'sanpham',
+    }
+  );
   return sanpham;
 };

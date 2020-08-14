@@ -1,7 +1,6 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
+const { Model } = require('sequelize');
+const bcryptjs = require('bcryptjs');
+
 module.exports = (sequelize, DataTypes) => {
   class khachhang extends Model {
     /**
@@ -11,19 +10,42 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      khachhang.hasMany(models.dondathang, {foreignKey: 'ma_kh'});
+      khachhang.hasMany(models.dondathang, { foreignKey: 'ma_kh' });
     }
-  };
-  khachhang.init({
-    makhachhang: DataTypes.INTEGER,
-    tenkhachhang: DataTypes.STRING,
-    sdt: DataTypes.STRING,
-    diachi: DataTypes.TEXT,
-    email: DataTypes.STRING,
-    vaitro: DataTypes.INTEGER
-  }, {
-    sequelize,
-    modelName: 'khachhang',
+  }
+  khachhang.init(
+    {
+      makhachhang: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+      },
+      tenkhachhang: DataTypes.STRING,
+      sdt: DataTypes.STRING,
+      diachi: DataTypes.TEXT,
+      email: DataTypes.STRING,
+      matkhau: DataTypes.STRING,
+      avatar: DataTypes.STRING,
+      loaixacthuc: DataTypes.STRING,
+      vaitro: DataTypes.INTEGER,
+    },
+    {
+      sequelize,
+      modelName: 'khachhang',
+    }
+  );
+
+  // eslint-disable-next-line
+  khachhang.addHook('beforeCreate', async function(user, options) {
+    user.matkhau = await user.hashPassword(user.matkhau); // eslint-disable-line
   });
+
+  khachhang.prototype.hashPassword = async function() {
+    return bcryptjs.hash(this.matkhau, 10);
+  };
+
+  khachhang.prototype.comparePassword = async function(password) {
+    return bcryptjs.compare(password, this.matkhau);
+  };
+
   return khachhang;
 };

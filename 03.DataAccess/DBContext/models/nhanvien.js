@@ -1,7 +1,5 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
+const { Model } = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
   class nhanvien extends Model {
     /**
@@ -11,18 +9,21 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      nhanvien.hasMany(models.dondathang, {foreignKey: 'ma_nv'});
-      nhanvien.hasMany(models.quangcaotinnhan, {foreignKey: 'ma_nv'});
-      nhanvien.hasMany(models.thongtinquancao, {foreignKey: 'ma_nv'});
+      nhanvien.hasMany(models.dondathang, { foreignKey: 'ma_nv' });
+      nhanvien.hasMany(models.quangcaotinnhan, { foreignKey: 'ma_nv' });
+      nhanvien.hasMany(models.thongtinquangcao, { foreignKey: 'ma_nv' });
     }
-  };
-  nhanvien.init({
-    manhanvien: DataTypes.INTEGER,
-    tennhanvien: DataTypes.STRING,
-    vaitro: DataTypes.INTEGER
-  }, {
-    sequelize,
-    modelName: 'nhanvien',
-  });
+  }
+  nhanvien.init(
+    {
+      manhanvien: DataTypes.INTEGER,
+      tennhanvien: DataTypes.STRING,
+      vaitro: DataTypes.INTEGER,
+    },
+    {
+      sequelize,
+      modelName: 'nhanvien',
+    }
+  );
   return nhanvien;
 };
