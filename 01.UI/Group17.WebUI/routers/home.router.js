@@ -11,6 +11,5 @@ router.use((req, res, next) => {
 });
 
 router.get('/', homeController.home);
-router.get('/dang-nhap', homeController.renderLogin);
 
 module.exports = router;

@@ -3,7 +3,12 @@ const home = (req, res) => {
 };
 
 const renderLogin = (req, res) => {
+  const message = req.flash('message');
+
+  console.log(message);
+
   return res.render('login/index', {
+    message,
     layout: false,
   });
 };

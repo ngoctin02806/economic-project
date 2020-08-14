@@ -9,6 +9,30 @@ const checkPasswordOfUser = async (email, password) => {
   const user = await getUserByEmail(email);
 
   if (user.value instanceof Error) throw user.value;
+
+  if (!user.value) {
+    return {
+      status: false,
+      code: 'not-exist',
+      message: 'User không tồn tại',
+    };
+  }
+
+  const checkPassword = await user.value.comparePassword(password);
+
+  if (!checkPassword) {
+    return {
+      status: false,
+      code: 'not-match-password',
+      message: 'Mật khẩu không chính xác',
+    };
+  }
+
+  return {
+    status: true,
+    message: 'success',
+    user,
+  };
 };
 
 const checkUserIsExist = async email => {

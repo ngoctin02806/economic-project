@@ -7,8 +7,10 @@ const exhbs = require('express-handlebars');
 const exHbsSection = require('express-handlebars-sections');
 const session = require('express-session');
 const passport = require('passport');
+const flash = require('connect-flash');
 
 require('./facebook.strategy');
+require('./local.strategy');
 
 const app = express();
 
@@ -48,6 +50,8 @@ module.exports = () =>
       app.set('views', path.resolve(__dirname, '../views'));
 
       app.use(session({ secret: 'cats' }));
+
+      app.use(flash());
 
       // parse application/x-www-form-urlencoded
       app.use(bodyParser.urlencoded({ extended: false }));
