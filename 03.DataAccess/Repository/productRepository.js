@@ -51,11 +51,10 @@ const getProductByIdDB = async productId => {
 const getAllCommentsOfProductDB = async productId => {
   try {
     const comments = await comment.findAll({
+      where: {
+        ma_sp: productId,
+      },
       include: [
-        {
-          model: sanpham,
-          where: { masanpham: productId },
-        },
         {
           model: khachhang,
         },
@@ -68,8 +67,19 @@ const getAllCommentsOfProductDB = async productId => {
   }
 };
 
+const insertCommentDB = async data => {
+  try {
+    const result = await comment.create({ ...data });
+
+    return Promise.resolve(Result.Ok(result));
+  } catch (error) {
+    return Promise.resolve(Result.Error(error));
+  }
+};
+
 module.exports = {
   getAllProductsDB,
   getProductByIdDB,
   getAllCommentsOfProductDB,
+  insertCommentDB,
 };

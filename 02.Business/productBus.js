@@ -1,9 +1,11 @@
+/* eslint-disable */
 const R = require('ramda');
 
 const {
   getAllProductsDB,
   getProductByIdDB,
   getAllCommentsOfProductDB,
+  insertCommentDB,
 } = require('../03.DataAccess/Repository/productRepository');
 
 /* eslint-disable no-useless-catch */
@@ -73,13 +75,57 @@ const getProductById = async productId => {
   }
 };
 
-const getAllCommentsOfProduct = async productId => {
+const getAllCommentsOfProduct = async (productId, userId) => {
   try {
-    const result = await getAllCommentsOfProductDB(productId);
+    const result = await getAllCommentsOfProductDB(parseInt(productId, 10));
 
     if (result.value instanceof Error) throw result.value;
 
-    return result.value;
+    const comments = result.value.map(cmt => {
+      return {
+        ...R.path(['dataValues'])(cmt),
+        khachhang: {
+          ...R.path(['khachhang', 'dataValues'])(cmt),
+        },
+        isMe:
+          R.path(['khachhang', 'dataValues', 'makhachhang'])(cmt) === userId,
+      };
+    });
+
+    return comments;
+  } catch (error) {
+    throw error;
+  }
+};
+
+const createNewComment = async data => {
+  try {
+    const regexPhonenumber = /[0-9]+/;
+    const regexEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+    const checkPhonenumber = regexPhonenumber.test(data.soDT);
+    if (!checkPhonenumber) {
+      return {
+        status: false,
+        message: 'Số điện thoại không bao gồm chữ và kí tự đặt biệt',
+      };
+    }
+
+    const checkEmail = regexEmail.test(data.email);
+    if (!checkEmail) {
+      return {
+        status: false,
+        message: 'Email không chính xác',
+      };
+    }
+
+    const result = await insertCommentDB(data);
+    if (result.value instanceof Error) throw result.value;
+
+    return {
+      status: true,
+      comment: result.value,
+    };
   } catch (error) {
     throw error;
   }
@@ -89,4 +135,5 @@ module.exports = {
   getAllProducts,
   getProductById,
   getAllCommentsOfProduct,
+  createNewComment,
 };

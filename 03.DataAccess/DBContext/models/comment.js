@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      comment.hasMany(models.quangcaotinnhan, { foreignKey: 'ma_cmt' });
+      comment.hasOne(models.quangcaotinnhan, { foreignKey: 'ma_cmt' });
 
       comment.belongsTo(models.sanpham, { foreignKey: 'ma_sp' });
       comment.belongsTo(models.khachhang, { foreignKey: 'ma_kh' });
@@ -25,8 +25,10 @@ module.exports = (sequelize, DataTypes) => {
       email: DataTypes.STRING,
       soDT: DataTypes.STRING,
       noidungbinhluan: DataTypes.TEXT,
-      ngaybinhluon: DataTypes.DATE,
+      ngaybinhluan: DataTypes.BIGINT,
       trangthai: DataTypes.INTEGER,
+      ma_sp: DataTypes.INTEGER,
+      ma_kh: DataTypes.INTEGER,
     },
     {
       sequelize,

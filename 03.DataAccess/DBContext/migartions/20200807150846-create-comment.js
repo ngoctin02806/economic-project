@@ -20,10 +20,16 @@ module.exports = {
       noidungbinhluan: {
         type: Sequelize.TEXT,
       },
-      ngaybinhluon: {
-        type: Sequelize.DATE,
+      ngaybinhluan: {
+        type: Sequelize.BIGINT,
       },
       trangthai: {
+        type: Sequelize.INTEGER,
+      },
+      ma_sp: {
+        type: Sequelize.INTEGER,
+      },
+      ma_kh: {
         type: Sequelize.INTEGER,
       },
       createdAt: {

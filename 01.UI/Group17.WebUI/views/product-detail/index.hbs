@@ -83,19 +83,18 @@
   <div class="row">
     <div class="col-10">
       {{#if comments.length}}
-      {{#each comments.value.comments}}
+      {{#each comments}}
       <div>
         <div class="d-flex align-items-center">
           <div class="mr-3 text-center" style="width: 160px;">
-            <img class="rounded-circle" src="{{this.user.avatar}}" width="60" height="60" alt="" srcset="">
-            <div class="mt-2" style="font-size: 13px; font-weight:500;">{{this.user.TenHienThi}}</div>
-            <div class="text-secondary" style="font-size: 12px; font-weight: 500;">23/11/2019</div>
+            <img class="rounded-circle" src="{{this.khachhang.avatar}}" width="60" height="60" alt="" srcset="">
+            <div class="mt-2" style="font-size: 13px; font-weight:500;">{{this.khachhang.tenkhachhang}}</div>
+            <div class="text-secondary" style="font-size: 12px; font-weight: 500;" id="format-date">{{this.ngaybinhluan}}</div>
           </div>
           <div class="w-100">
             <div class="auction-content-comment">
-              <div class="rating_r rating_r_5 product_rating mt-0">{{{renderStar this.BinhChon}}}</div>
               <div class="text-secondary auction-content-comment-detail" style="font-weight: 500;">
-                {{{this.BinhLuan}}}
+                {{{this.noidungbinhluan}}}
               </div>
             </div>
             {{#if this.isMe}}
@@ -115,16 +114,35 @@
     </div>
     {{#if user}}
     <div class="col-10">
-      <form id="box-comment" action="/e-commerce/comment/create" method="POST">
-        <input hidden="true" type="text" name="idProduct" value="{{product.MaMatHang}}">
-        <input hidden="true" type="text" name="idUser" value="{{isAuth.dataValues.MaKhachHang}}">
+      {{#if message}}
+      <div class="alert alert-danger" role="alert">
+        {{message}}
+      </div>
+      {{/if}}
+      <form id="box-comment" action="/san-pham/{{product.masanpham}}/{{slugify product.tensanpham}}" method="POST">
+        <input hidden="true" type="text" name="idProduct" value="{{product.masanpham}}">
+        <input hidden="true" type="text" name="idUser" value="{{user.makhachhang}}">
         <input id="auction-input-idcomment" hidden="true" type="text" name="idComment">
+        <div class="row">
+          <div class="col-6">
+            <div class="form-group">
+              <label for="exampleInputEmail1">Họ tên</label>
+              <input name="name" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+            </div>
+            <div class="form-group">
+              <label for="exampleInputPassword1">Email</label>
+              <input name="email" type="email" class="form-control" id="exampleInputPassword1">
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="form-group">
+              <label for="exampleInput">Số điện thoại</label>
+              <input name="phonenumber" type="text" class="form-control" id="exampleInput">
+            </div>
+          </div>
+        </div>
         <textarea id="editor1" name="editor1"></textarea>
         <div class="d-flex align-items-center justify-content-between mt-2">
-          <div>
-            <div id="auction-rating-comment"></div>
-            <div>Vui lòng đánh giá ?</div>
-          </div>
           <button id="box-comment-submit" class="btn btn-primary float-right" type="submit">Trả lời</button>
         </div>
       </form>
@@ -141,4 +159,20 @@
 
 {{#section 'script'}}
 <script src="/static/assets/js/product_custom.js"></script>
+{{#if user}}
+<script src="https://cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
+<script>
+  CKEDITOR.replace('editor1');
+</script>
+{{/if}}
+<script type="text/javascript">
+  var time = parseInt($('#format-date').text().toString());
+  var parseTime = new Date(time);
+  console.log($('#format-date').text().toString())
+
+  var result = `${parseTime.getDate()}/${parseTime.getMonth() + 1}/${parseTime.getFullYear()}`
+  $('#format-date').text(result)
+
+  console.log(result);
+</script>
 {{/section}}

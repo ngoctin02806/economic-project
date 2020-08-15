@@ -1,7 +1,5 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
+const { Model } = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
   class quangcaotinnhan extends Model {
     /**
@@ -11,17 +9,20 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      quangcaotinnhan.belongsTo(models.nhanvien, {foreignKey: 'ma_nv'});
-      quangcaotinnhan.belongsTo(models.comment, {foreignKey: 'ma_cmt'});
+      quangcaotinnhan.belongsTo(models.nhanvien, { foreignKey: 'ma_nv' });
+      quangcaotinnhan.belongsTo(models.comment, { foreignKey: 'ma_cmt' });
     }
-  };
-  quangcaotinnhan.init({
-    maquangcao: DataTypes.INTEGER,
-    noidungtinnhan: DataTypes.TEXT,
-    dagui: DataTypes.INTEGER
-  }, {
-    sequelize,
-    modelName: 'quangcaotinnhan',
-  });
+  }
+  quangcaotinnhan.init(
+    {
+      maquangcao: DataTypes.INTEGER,
+      noidungtinnhan: DataTypes.TEXT,
+      dagui: DataTypes.INTEGER,
+    },
+    {
+      sequelize,
+      modelName: 'quangcaotinnhan',
+    }
+  );
   return quangcaotinnhan;
 };
