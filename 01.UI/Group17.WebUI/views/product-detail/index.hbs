@@ -168,11 +168,8 @@
 <script type="text/javascript">
   var time = parseInt($('#format-date').text().toString());
   var parseTime = new Date(time);
-  console.log($('#format-date').text().toString())
 
   var result = `${parseTime.getDate()}/${parseTime.getMonth() + 1}/${parseTime.getFullYear()}`
   $('#format-date').text(result)
-
-  console.log(result);
 </script>
 {{/section}}
