@@ -1,4 +1,4 @@
-'use strict';
+/* eslint-disable */
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable('comments', {
@@ -6,28 +6,37 @@ module.exports = {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+      },
+      hoten: {
+        type: Sequelize.STRING,
+      },
+      email: {
+        type: Sequelize.STRING,
+      },
+      soDT: {
+        type: Sequelize.STRING,
       },
       noidungbinhluan: {
-        type: Sequelize.TEXT
+        type: Sequelize.TEXT,
       },
       ngaybinhluon: {
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
       },
       trangthai: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
-      }
+        type: Sequelize.DATE,
+      },
     });
   },
   down: async (queryInterface, Sequelize) => {
     await queryInterface.dropTable('comments');
-  }
+  },
 };

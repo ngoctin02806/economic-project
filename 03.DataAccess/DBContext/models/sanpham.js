@@ -22,10 +22,16 @@ module.exports = (sequelize, DataTypes) => {
   }
   sanpham.init(
     {
-      masanpham: DataTypes.INTEGER,
+      masanpham: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+      },
       tensanpham: DataTypes.STRING,
       giasp: DataTypes.DECIMAL,
       soluongtong: DataTypes.INTEGER,
+      mota: DataTypes.STRING,
+      ma_dm: DataTypes.INTEGER,
+      ma_ncc: DataTypes.INTEGER,
     },
     {
       sequelize,

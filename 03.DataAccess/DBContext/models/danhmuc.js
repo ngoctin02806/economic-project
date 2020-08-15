@@ -1,7 +1,5 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
+const { Model } = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
   class danhmuc extends Model {
     /**
@@ -11,15 +9,21 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      danhmuc.hasMany(models.sanpham, {foreignKey: 'ma_dm'});
+      danhmuc.hasMany(models.sanpham, { foreignKey: 'ma_dm' });
     }
-  };
-  danhmuc.init({
-    madanhmuc: DataTypes.INTEGER,
-    tendanhmuc: DataTypes.STRING
-  }, {
-    sequelize,
-    modelName: 'danhmuc',
-  });
+  }
+  danhmuc.init(
+    {
+      madanhmuc: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+      },
+      tendanhmuc: DataTypes.STRING,
+    },
+    {
+      sequelize,
+      modelName: 'danhmuc',
+    }
+  );
   return danhmuc;
 };

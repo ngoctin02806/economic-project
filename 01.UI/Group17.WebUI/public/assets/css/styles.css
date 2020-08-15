@@ -1,0 +1,418 @@
+html, body {
+  font-family: 'Montserrat', sans-serif;
+}
+
+.auction-banner {
+  background-image: url('../img/banner.jpg');
+  padding: 80px 0px;
+  background-size: cover;
+}
+
+.auction-font-size {
+  font-size: 22px;
+}
+
+.auction-input-height {
+  height: auto;
+}
+
+.auction-btn-search {
+  width: 100px;
+}
+
+#auction-search-price {
+  height: 0px;
+}
+
+.auction-more-setting {
+  top: 100%;
+  left: 0;
+  width: 100%;
+}
+
+.auction-circle {
+  width: 64px;
+  height: 64px;
+  line-height: 64px;
+}
+
+.auction-fix-font-size {
+  font-size: 15px;
+}
+
+.auction-category-parent {
+  position: relative;
+  width: 100%;
+  padding-top: 100%;
+}
+
+.auction-category-child {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.auction-top-end {
+  background-color: #f1f2f3;
+}
+
+.auction-quickly-text {
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.auction-timer {
+  top: 5px;
+  right: 5px;
+  font-size: 13px;
+  font-weight: 400;
+  background-color: #EA686A;
+  padding: 0px 12px;
+  width: 82px;
+  text-align: center;
+}
+
+.auction-size-tag {
+  font-size: 13px;
+  font-weight: 400;
+}
+
+.auction-size-tag a {
+  color: #6c757d;
+}
+
+.auction-size-tag a:hover {
+  color: #ea686a;
+}
+
+.auction-name-product {
+  font-weight: 700;
+}
+
+.auction-name-product i {
+  cursor: pointer;
+  color: #494f54;
+}
+
+.auction-name-product i:hover {
+  color: #EA686A;
+}
+
+.auction-size-date > div {
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.auction-bidder div {
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.auction-price div {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 600;
+  font-size: 19px;
+}
+
+.auction-timer {
+  z-index: 3;
+}
+
+.auction-price .auction-view-detail a {
+  font-size: 13px;
+  text-decoration: none;
+  color: #494f54;
+}
+
+.auction-price .auction-view-detail a:hover {
+  color: #EA686A;
+  text-decoration: underline;
+}
+
+.auction-icon-auc {
+  bottom: 5px;
+  left: 5px;
+}
+
+.auction-icon-auc svg {
+  fill: #fff;
+  width: 17px;
+  left: 5px;
+}
+
+.auction-icon-auc {
+  background-color: #EA686A;
+}
+
+.auction-icon-auc div {
+  font-family: 'Open san', sans-serif;
+  color: #fff;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.auction-footer {
+  background-color: #201932;
+  color: #fff;
+  font-family: 'Open san' sans-serif;
+  padding: 60px 0px;
+}
+
+.auction-footer-title {
+  font-size: 19px;
+  font-weight: bold;
+}
+
+.auction-footer-about-us div {
+  font-size: 15px;
+  font-family: 'Open san', sans-serif;
+  color: #777777;
+}
+
+.auction-sign-up-email {
+  background-color: #222;
+}
+
+.auction-sign-up-email:hover {
+  background-color: #EA686A;
+}
+
+.auction-list-page li a {
+  font-size: 14px;
+  color: #777777;
+  font-family: 'Open san', sans-serif;
+}
+
+.auction-list-page li a:hover {
+  color: #EA686A;
+}
+
+.auction-list-page .auction-item {
+  font-size: 14px;
+  color: #777777;
+  font-family: 'Open san', sans-serif;
+}
+
+.auction-avatar-user {
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(40%);
+}
+
+.auction-avatar-user:hover .auction-change-avatar {
+  display: block !important;
+}
+
+.auction-show-camera {
+  display: block !important;
+}
+
+.auction-avatar-user label i {
+  font-size: 23px;
+  color: #6c757d;
+}
+
+.auction-avatar-user label {
+  background-color: rgba(221, 221, 221, 0.438);
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.auction-avatar-user img {
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.auction-customize-info div.card-body h5  {
+  font-size: 19px;
+  font-weight: bold;
+}
+
+.auction-customize-info div.card-body p  {
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.auction-sell-product .auction-number-auc {
+  font-size: 17px;
+}
+
+.auction-sell-product .auction-aucted {
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.auction-update-profile {
+  font-size: 14px;
+  font-weight: 500;
+  background: #6a3093; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to left, #6a3093, #a044ff); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #6a3093, #a044ff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  border: #7460EE;
+}
+
+.auction-update-profile:hover {
+  background-color: #7460EE;
+}
+
+.auction-customize-info-user .auction-profile-title {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.auction-join-date {
+  font-size: 12px;
+  font-weight: 600;
+  color: rgb(189, 189, 189);
+}
+
+.auction-profile-detail {
+  font-size: 14px;
+  font-weight: 600;
+  color: #777777;
+}
+
+.auction-profile-detail > div {
+  background-color: #f9f9f9;
+}
+
+#myTab li a {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.auction-pagination {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.auction-active a {
+  background-color: #a044ff;
+  color: #fff;
+}
+
+.auction-customize-avatar-comment .auction-link-user-profile img {
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.auction-comment-product div {
+  text-decoration: none;
+  font-size: 12px;
+  background-color: #EA686A;
+  font-weight: 600;
+  text-align: center;
+  bottom: 0;
+}
+
+.auction-fix-position-snipper {
+  top: 0;
+  left: 0;
+  height: 100%;
+  background-color: rgba(221, 221, 221, 0.438);
+  z-index: 10;
+}
+
+.auction-not-found {
+  height: 100%;
+}
+
+.auction-not-found .auction-not-found-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.auction-not-found .auction-not-found-content .auction-404 {
+  font-size: 150px;
+  color: #fff;
+  margin-right: 30px;
+}
+
+.auction-not-found .auction-not-found-content .auction-404-description div:first-child {
+  font-size: 50px;
+  font-weight: 600;
+}
+
+.auction-not-found .auction-not-found-content .auction-404-description div:last-child {
+  font-size: 25px;
+  font-weight: 400;
+}
+
+.auction-add-product h4 {
+  font-size: 18px;
+}
+
+.auction-add-product-content h4 {
+  font-weight: 600;
+}
+
+.auction-add-product-form .form-group label {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.auction-add-product-select button {
+  font-size: 15px;
+  min-width: 250px;
+}
+
+.auction-add-product-select-cate {
+  list-style: none;
+  width: 250px;
+  background-color: #fff;
+  display: none;
+}
+
+.auction-add-product-select-cate li {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.auction-add-product-select-cate li:hover {
+  background-color: #f8f9fa;
+  cursor: pointer;
+}
+
+#auction-button-select {
+  width: 250px;
+}
+
+.auction-upload-image {
+  width: 100%;
+  height: 150px;
+  border: 1px dashed #6c757d;
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+}
+
+.auction-upload-select-iamge {
+  width: 140px;
+  height: 95%;
+  border: 1.5px dashed #EA686A;
+  cursor: pointer;
+}
+
+.auction-upload-image::-webkit-scrollbar:horizontal {
+  display: none;
+}
+
+/* Track */
+.auction-upload-image::-webkit-scrollbar-track:horizontal {
+  background: #f1f1f1;
+}
+
+/* Handle */
+.auction-upload-image::-webkit-scrollbar-thumb:horizontal {
+  background: #888;
+}
+
+/* Handle on hover */
+.auction-upload-image::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}

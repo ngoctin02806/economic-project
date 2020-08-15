@@ -15,6 +15,7 @@ require('./local.strategy');
 const app = express();
 
 const router = require('../routers/index');
+const slugify = require('../utils/slugify');
 
 const isProduction = process.env.NODE_ENV === 'production';
 
@@ -29,6 +30,7 @@ module.exports = () =>
           partialsDir: path.resolve(__dirname, '../views/partials'),
           helpers: {
             section: exHbsSection(),
+            slugify,
           },
         })
       );

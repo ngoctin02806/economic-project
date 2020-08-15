@@ -4,63 +4,79 @@ const {
   getUserById,
 } = require('../03.DataAccess/Repository/userRepository');
 
-// eslint-disable-next-line no-unused-vars
+/* eslint-disable no-useless-catch */
 const checkPasswordOfUser = async (email, password) => {
-  const user = await getUserByEmail(email);
+  try {
+    const user = await getUserByEmail(email);
 
-  if (user.value instanceof Error) throw user.value;
+    if (user.value instanceof Error) throw user.value;
 
-  if (!user.value) {
+    if (!user.value) {
+      return {
+        status: false,
+        code: 'not-exist',
+        message: 'User không tồn tại',
+      };
+    }
+
+    const checkPassword = await user.value.comparePassword(password);
+
+    if (!checkPassword) {
+      return {
+        status: false,
+        code: 'not-match-password',
+        message: 'Mật khẩu không chính xác',
+      };
+    }
+
     return {
-      status: false,
-      code: 'not-exist',
-      message: 'User không tồn tại',
+      status: true,
+      message: 'success',
+      user,
     };
+  } catch (error) {
+    throw error;
   }
-
-  const checkPassword = await user.value.comparePassword(password);
-
-  if (!checkPassword) {
-    return {
-      status: false,
-      code: 'not-match-password',
-      message: 'Mật khẩu không chính xác',
-    };
-  }
-
-  return {
-    status: true,
-    message: 'success',
-    user,
-  };
 };
 
 const checkUserIsExist = async email => {
-  const user = await getUserByEmail(email);
+  try {
+    const user = await getUserByEmail(email);
 
-  if (user.value instanceof Error) throw user.value;
+    if (user.value instanceof Error) throw user.value;
 
-  return user.value;
+    return user.value;
+  } catch (error) {
+    throw error;
+  }
 };
 
 const createNewUser = async data => {
-  const user = await checkUserIsExist(data.email);
+  try {
+    const user = await checkUserIsExist(data.email);
 
-  if (!user) {
-    const newUser = await insertUser(data);
+    if (!user) {
+      const newUser = await insertUser(data);
 
-    return newUser.value;
+      return newUser.value;
+    }
+
+    return user.dataValues;
+  } catch (error) {
+    throw error;
   }
-
-  return user.dataValues;
 };
 
 const getUserByIdentify = async userId => {
-  const user = await getUserById(userId);
+  try {
+    const user = await getUserById(userId);
 
-  if (user.value instanceof Error) throw user.value;
+    if (user.value instanceof Error) throw user.value;
 
-  return user.value.dataValues;
+    return user.value.dataValues;
+  } catch (error) {
+    throw error;
+  }
 };
 
 module.exports = {

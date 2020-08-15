@@ -1,4 +1,4 @@
-'use strict';
+/* eslint-disable */
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable('hinhanhs', {
@@ -6,25 +6,28 @@ module.exports = {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       lienkethinhanh: {
-        type: Sequelize.TEXT
+        type: Sequelize.TEXT,
       },
       hienthi: {
-        type: Sequelize.BOOLEAN
+        type: Sequelize.BOOLEAN,
+      },
+      ma_sp: {
+        type: Sequelize.INTEGER,
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
-      }
+        type: Sequelize.DATE,
+      },
     });
   },
   down: async (queryInterface, Sequelize) => {
     await queryInterface.dropTable('hinhanhs');
-  }
+  },
 };

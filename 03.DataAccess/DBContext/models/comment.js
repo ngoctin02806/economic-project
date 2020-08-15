@@ -1,7 +1,5 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
+const { Model } = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
   class comment extends Model {
     /**
@@ -11,20 +9,29 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      comment.hasMany(models.quangcaotinnhan, {foreignKey: 'ma_cmt'})
+      comment.hasMany(models.quangcaotinnhan, { foreignKey: 'ma_cmt' });
 
-      comment.belongsTo(models.sanpham, {foreignKey: 'ma_sp'});
-      comment.belongsTo(models.khachhang, {foreignKey: 'ma_kh'});
+      comment.belongsTo(models.sanpham, { foreignKey: 'ma_sp' });
+      comment.belongsTo(models.khachhang, { foreignKey: 'ma_kh' });
     }
-  };
-  comment.init({
-    macomment: DataTypes.INTEGER,
-    noidungbinhluan: DataTypes.TEXT,
-    ngaybinhluon: DataTypes.DATE,
-    trangthai: DataTypes.INTEGER
-  }, {
-    sequelize,
-    modelName: 'comment',
-  });
+  }
+  comment.init(
+    {
+      macomment: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+      },
+      hoten: DataTypes.STRING,
+      email: DataTypes.STRING,
+      soDT: DataTypes.STRING,
+      noidungbinhluan: DataTypes.TEXT,
+      ngaybinhluon: DataTypes.DATE,
+      trangthai: DataTypes.INTEGER,
+    },
+    {
+      sequelize,
+      modelName: 'comment',
+    }
+  );
   return comment;
 };
