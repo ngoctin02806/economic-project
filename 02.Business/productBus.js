@@ -111,6 +111,13 @@ const createNewComment = async data => {
       };
     }
 
+    if (data.soDT.length > 10) {
+      return {
+        status: false,
+        message: 'Số điện thoại không quá 10 chữ số',
+      };
+    }
+
     const checkEmail = regexEmail.test(data.email);
     if (!checkEmail) {
       return {
