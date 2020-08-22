@@ -1,9 +1,10 @@
 /* eslint-disable */
+const { getProductById } = require('../../../02.Business/productBus');
+
 const {
-  getProductById,
   getAllCommentsOfProduct,
   createNewComment,
-} = require('../../../02.Business/productBus');
+} = require('../../../02.Business/commentBus');
 
 const renderProductDetail = async (req, res, next) => {
   try {

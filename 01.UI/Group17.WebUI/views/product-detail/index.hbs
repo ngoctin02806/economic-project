@@ -89,7 +89,7 @@
           <div class="mr-3 text-center" style="width: 160px;">
             <img class="rounded-circle" src="{{this.khachhang.avatar}}" width="60" height="60" alt="" srcset="">
             <div class="mt-2" style="font-size: 13px; font-weight:500;">{{this.khachhang.tenkhachhang}}</div>
-            <div class="text-secondary" style="font-size: 12px; font-weight: 500;" id="format-date">{{this.ngaybinhluan}}</div>
+            <div class="text-secondary format-date" style="font-size: 12px; font-weight: 500;">{{this.ngaybinhluan}}</div>
           </div>
           <div class="w-100">
             <div class="auction-content-comment">
@@ -166,10 +166,12 @@
 </script>
 {{/if}}
 <script type="text/javascript">
-  var time = parseInt($('#format-date').text().toString());
-  var parseTime = new Date(time);
+  var timeArray = $('.format-date');
+  timeArray.each((index, element) => {
 
-  var result = `${parseTime.getDate()}/${parseTime.getMonth() + 1}/${parseTime.getFullYear()}`
-  $('#format-date').text(result)
+    var parseTime = new Date(parseInt($(element).text().toString()));
+    var result = `${parseTime.getDate()}/${parseTime.getMonth() + 1}/${parseTime.getFullYear()}`
+    $(element).text(result)
+  })
 </script>
 {{/section}}
