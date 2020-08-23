@@ -42,7 +42,47 @@ const getProductByIdDB = async productId => {
   }
 };
 
+const getProductByMadanhmucDB = async (cateId, offset, limit) => {
+  try {
+    const product = await sanpham.findAll({
+      where: {
+        ma_dm: cateId,
+      },
+      include: [
+        {
+          model: hinhanh,
+        },
+      ],
+      offset,
+      limit,
+    });
+
+    return Promise.resolve(Result.Ok(product));
+  } catch (error) {
+    return Promise.resolve(Result.Error(error));
+  }
+};
+const getallProductByMadanhmucDB = async cateId => {
+  try {
+    const product = await sanpham.findAll({
+      where: {
+        ma_dm: cateId,
+      },
+      include: [
+        {
+          model: hinhanh,
+        },
+      ],
+    });
+
+    return Promise.resolve(Result.Ok(product));
+  } catch (error) {
+    return Promise.resolve(Result.Error(error));
+  }
+};
 module.exports = {
   getAllProductsDB,
   getProductByIdDB,
+  getProductByMadanhmucDB,
+  getallProductByMadanhmucDB,
 };
