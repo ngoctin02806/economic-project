@@ -16,5 +16,5 @@ router.get(
   categoryMiddleware,
   categoryController.category
 );
-
+router.get('/search/page=:page', categoryMiddleware, categoryController.search);
 module.exports = router;

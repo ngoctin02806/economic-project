@@ -1,5 +1,5 @@
 const Result = require('folktale/result');
-
+const { Op } = require('sequelize');
 const { sanpham, hinhanh, danhmuc } = require('../DBContext/models');
 
 const getAllProductsDB = async (offset, limit) => {
@@ -80,9 +80,61 @@ const getallProductByMadanhmucDB = async cateId => {
     return Promise.resolve(Result.Error(error));
   }
 };
+const getAllProductsbySearch = async (offset, limit, search) => {
+  try {
+    const products = await sanpham.findAll({
+      include: [
+        {
+          model: hinhanh,
+        },
+      ],
+      where: [
+        {
+          [Op.or]: {
+            tensanpham: {
+              [Op.substring]: search,
+            },
+          },
+        },
+      ],
+      offset,
+      limit,
+    });
+
+    return Promise.resolve(Result.Ok(products));
+  } catch (error) {
+    return Promise.resolve(Result.Error(error));
+  }
+};
+const getnumAllProductsbySearch = async search => {
+  try {
+    const products = await sanpham.findAll({
+      include: [
+        {
+          model: hinhanh,
+        },
+      ],
+      where: [
+        {
+          [Op.or]: {
+            tensanpham: {
+              [Op.substring]: search,
+            },
+          },
+        },
+      ],
+    });
+
+    return Promise.resolve(Result.Ok(products));
+  } catch (error) {
+    return Promise.resolve(Result.Error(error));
+  }
+};
 module.exports = {
   getAllProductsDB,
   getProductByIdDB,
   getProductByMadanhmucDB,
   getallProductByMadanhmucDB,
+  getAllProductsbySearch,
+  getnumAllProductsbySearch,
 };

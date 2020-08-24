@@ -68,7 +68,9 @@
 
               <div class="product_price">{{product.giasp}}</div>
               <div class="button_container">
+                {{#if product.new}}
                 <button type="button" class="button cart_button">Thêm vào giỏ</button>
+                {{/if}}
                 <div class="product_fav"><i class="fas fa-heart"></i></div>
               </div>
             </form>

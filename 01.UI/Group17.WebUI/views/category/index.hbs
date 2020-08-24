@@ -49,7 +49,7 @@
 									<li>
 										<span class="sorting_text">highest rated<i class="fas fa-chevron-down"></span></i>
 										<ul>
-											<li class="shop_sorting_button" data-isotope-option='{ "sortBy": "original-order" }'>highest rated</li>
+											{{!-- <li class="shop_sorting_button" data-isotope-option='{ "sortBy": "original-order" }'>highest rated</li> --}}
 											<li class="shop_sorting_button" data-isotope-option='{ "sortBy": "name" }'>name</li>
 											<li class="shop_sorting_button"data-isotope-option='{ "sortBy": "price" }'>price</li>
 										</ul>
@@ -72,7 +72,7 @@
 								<div class="product_fav"><i class="fas fa-heart"></i></div>
 								<ul class="product_marks">
 									
-									<li class="product_mark product_new">new</li>
+									<li class="product_mark product_new" {{#if hethang}}style="background-color: red;"{{/if}}>{{new}}{{hethang}}</li>
 								</ul>
 							</div>
 						{{/each }}
@@ -88,7 +88,7 @@
 							<div class="page_prev d-flex flex-column align-items-center justify-content-center"><a href="{{pre}}"><i class="fas fa-chevron-left"></i></a></div>
 							<ul class="page_nav d-flex flex-row">
 								{{#each number}}
-								<li class="{{aa}}"><a href="/category/{{id}}&page={{pages}}">{{pages}}</a></li>
+								<li class="{{aa}}"><a href="{{herf}}">{{pages}}</a></li>
 								{{/each}}
 								
 							</ul>

@@ -6,6 +6,8 @@ const {
     getProductByIdDB,
     getProductByMadanhmucDB,
     getallProductByMadanhmucDB,
+    getAllProductsbySearch,
+    getnumAllProductsbySearch,
 } = require('../03.DataAccess/Repository/productRepository');
 
 /* eslint-disable no-useless-catch */
@@ -77,7 +79,7 @@ const getProductById = async productId => {
 
 const getAllProductbyMadanhmuc = async(category, page) => {
     try {
-        const product = await getProductByMadanhmucDB(category, ((page - 1) * 15) + 1, 15);
+        const product = await getProductByMadanhmucDB(category, ((page - 1) * 15), 15);
         if (product.value instanceof Error) throw product.value;
 
         const result = product.value.map(product => {
@@ -125,11 +127,60 @@ const getProductbyMadanhmuc = async(category) => {
         throw error;
     }
 }
+const getAllProductsbySearchBus = async(page, search) => {
+    try {
+        const product = await getAllProductsbySearch(((page - 1) * 15), 15, search);
+        if (product.value instanceof Error) throw product.value;
+        const result = product.value.map(product => {
+            return {
+                ...product.dataValues,
+                hinhanhs: R.path(['hinhanhs'])(product).map(img => {
+                    return {
+                        ...R.path(['dataValues'])(img),
+                    };
+                }),
+                img_show: {
+                    ...R.path(['hinhanhs'])(product).find(img => img.hienthi === true)
+                    .dataValues,
+                },
 
+            };
+        });
+
+
+        return result;
+    } catch (error) {
+        throw error;
+    }
+}
+const getnumAllProductsbySearchBus = async(search) => {
+    try {
+        const product = await getnumAllProductsbySearch(search);
+        const result = product.value.map(product => {
+            return {
+                ...product.dataValues,
+                hinhanhs: R.path(['hinhanhs'])(product).map(img => {
+                    return {
+                        ...R.path(['dataValues'])(img),
+                    };
+                }),
+                img_show: {
+                    ...R.path(['hinhanhs'])(product).find(img => img.hienthi === true)
+                    .dataValues,
+                },
+            };
+        });
+
+        return result;
+    } catch (error) {
+        throw error;
+    }
+}
 module.exports = {
     getAllProducts,
     getProductById,
     getAllProductbyMadanhmuc,
     getProductbyMadanhmuc,
-
+    getAllProductsbySearchBus,
+    getnumAllProductsbySearchBus
 };
