@@ -22,7 +22,7 @@ const renderProductDetail = async(req, res, next) => {
         if (value.product.soluongtong != 0) {
             value.product.new = "new";
         }
-        console.log(value);
+
         const comments = await getAllCommentsOfProduct(
             productId,
             user && user.makhachhang

@@ -67,16 +67,16 @@ const search = async(req, res, next) => {
     try {
         const { page } = req.params;
         const { search } = req.query;
-        console.log(search);
+
         const products = await getAllProductsbySearchBus(1, search);
         for (let i = 0; i < products.length; i++) {
-            console.log(products[i].soluongtong);
+
             if (products[i].soluongtong == 0) {
                 products[i].hethang = "Hết"
             } else {
                 products[i].new = "New"
             }
-            console.log(products[i]);
+
         }
         const numpruduct = await getnumAllProductsbySearchBus(search)
         const namea = "Tìm kiếm sản phẩm";
