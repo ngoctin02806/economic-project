@@ -8,6 +8,7 @@ const exHbsSection = require('express-handlebars-sections');
 const session = require('express-session');
 const passport = require('passport');
 const flash = require('connect-flash');
+const cookieParser = require('cookie-parser');
 
 require('./facebook.strategy');
 require('./local.strategy');
@@ -51,7 +52,7 @@ module.exports = () =>
 
       app.set('views', path.resolve(__dirname, '../views'));
 
-      app.use(session({ secret: 'cats' }));
+      //app.use(session({ secret: 'cats' }));
 
       app.use(flash());
 
@@ -59,6 +60,23 @@ module.exports = () =>
       app.use(bodyParser.urlencoded({ extended: false }));
       // parse application/json
       app.use(bodyParser.json());
+      
+      app.use(cookieParser());
+
+      app.use(session({
+        cookie: {httpOnly:true, maxAge: 30 * 40 * 60 *60 * 1000},
+        secret: 'S3cret',
+        resave: false,
+        saveUninitialized: false
+      }));
+      let Cart = require('../controllers/cart.controller');
+      // app.use((req,res, next) => {
+      //   var cart = new Cart(req.session.cart ? req.session.cart : {});
+      //   req.session.cart = cart;
+      //   res.locals.totalQuantity = cart.totalQuantity;
+      //   next();
+      // });
+
 
       app.use(passport.initialize());
 
@@ -69,7 +87,7 @@ module.exports = () =>
       // router
       app.use('/', router);
 
-      // catch 404 error
+      //catch 404 error
       app.use((req, res, next) => {
         const err = new Error('Resource is not exist');
         err.status = 404;
