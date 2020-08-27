@@ -68,7 +68,9 @@
 
               <div class="product_price">{{product.giasp}}</div>
               <div class="button_container">
+                {{#if product.new}}
                 <button type="button" class="button cart_button">Thêm vào giỏ</button>
+                {{/if}}
                 <div class="product_fav"><i class="fas fa-heart"></i></div>
               </div>
             </form>
@@ -84,12 +86,13 @@
     <div class="col-10">
       {{#if comments.length}}
       {{#each comments}}
-      <div>
+      <div id="comment-{{this.macomment}}">
         <div class="d-flex align-items-center">
           <div class="mr-3 text-center" style="width: 160px;">
             <img class="rounded-circle" src="{{this.khachhang.avatar}}" width="60" height="60" alt="" srcset="">
             <div class="mt-2" style="font-size: 13px; font-weight:500;">{{this.khachhang.tenkhachhang}}</div>
-            <div class="text-secondary format-date" style="font-size: 12px; font-weight: 500;">{{this.ngaybinhluan}}</div>
+            <div class="text-secondary format-date" style="font-size: 12px; font-weight: 500;">{{this.ngaybinhluan}}
+            </div>
           </div>
           <div class="w-100">
             <div class="auction-content-comment">
@@ -98,9 +101,10 @@
               </div>
             </div>
             {{#if this.isMe}}
-            <div class="d-flex justify-content-end">
-              <a data-comment-id="{{this.MaBinhLuan}}" href="" class="mr-3 auction-delete-comment">Xóa</a>
-              <a data-comment-id="{{this.MaBinhLuan}}" href="#" class="auction-update-comment">Sửa</a>
+            <div class="d-flex justify-content-end" data-email="{{this.email}}" data-name="{{this.hoten}}"
+              data-phone="{{this.soDT}}">
+              <a data-comment-id="{{this.macomment}}" href="" class="mr-3 auction-delete-comment">Xóa</a>
+              <a data-comment-id="{{this.macomment}}" href="#" class="auction-update-comment">Sửa</a>
             </div>
             {{/if}}
           </div>
@@ -163,6 +167,7 @@
 <script src="https://cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
 <script>
   CKEDITOR.replace('editor1');
+
 </script>
 {{/if}}
 <script type="text/javascript">
@@ -172,6 +177,50 @@
     var parseTime = new Date(parseInt($(element).text().toString()));
     var result = `${parseTime.getDate()}/${parseTime.getMonth() + 1}/${parseTime.getFullYear()}`
     $(element).text(result)
+  });
+
+  $('.auction-delete-comment').click(function (e) {
+    e.preventDefault();
+    var currentElem = $(this);
+    var idCommentDel = $(this).attr('data-comment-id');
+    $.ajax({
+      url: `/comments/${idCommentDel}`,
+      type: 'POST',
+      success: function (result) {
+        currentElem.parent().parent().parent().parent().remove();
+      },
+      error: function (xhr, status, error) {
+        console.log(error);
+      }
+    })
   })
+
+  $('.auction-update-comment').click(function (e) {
+    e.preventDefault();
+    var idComment = $(this).attr('data-comment-id');
+    var emailComment = $(this).parent().attr('data-email');
+    var nameComment = $(this).parent().attr('data-name');
+    var phoneCommnent = $(this).parent().attr('data-phone');
+
+    console.log(emailComment);
+
+    var comment = $(this)
+      .parent()
+      .parent()
+      .children('.auction-content-comment')
+      .children('.auction-content-comment-detail')
+      .html();
+    $('#auction-ckeditor-1').append(comment);
+
+    $('#exampleInputEmail1').val(nameComment);
+    $('#exampleInputPassword1').val(emailComment);
+    $('#exampleInput').val(phoneCommnent);
+    CKEDITOR.instances['editor1'].setData(comment);
+
+    $('#box-comment').attr('action', '/san-pham/{{product.masanpham}}/{{slugify product.tensanpham}}/cap-nhap');
+    $('#box-comment-submit').text(`Cập nhập`);
+    $('#auction-input-idcomment:text').attr('value', idComment);
+  });
+
 </script>
 {{/section}}

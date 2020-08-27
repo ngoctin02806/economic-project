@@ -31,7 +31,34 @@ const insertCommentDB = async data => {
   }
 };
 
+const updateCommentDB = async (data, commentId) => {
+  try {
+    const result = await comment.update(
+      { ...data },
+      { where: { macomment: commentId } }
+    );
+
+    return Promise.resolve(Result.Ok(result));
+  } catch (error) {
+    return Promise.resolve(Result.Error(error));
+  }
+};
+
+const deleteCommentDB = async commentId => {
+  try {
+    const result = await comment.destroy({
+      where: { macomment: commentId },
+    });
+
+    return Promise.resolve(Result.Ok(result));
+  } catch (error) {
+    return Promise.resolve(Result.Error(error));
+  }
+};
+
 module.exports = {
   getAllCommentsOfProductDB,
   insertCommentDB,
+  updateCommentDB,
+  deleteCommentDB,
 };
