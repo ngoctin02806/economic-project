@@ -32,4 +32,8 @@ router.get(
 
 router.get('/dang-xuat', userController.logout);
 
+router.get('/dang-ky', userController.renderRegister);
+
+router.post('/dang-ky', userController.register);
+
 module.exports = router;
