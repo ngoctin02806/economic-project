@@ -8,6 +8,7 @@ const exHbsSection = require('express-handlebars-sections');
 const session = require('express-session');
 const passport = require('passport');
 const flash = require('connect-flash');
+const cookieParser = require('cookie-parser');
 
 require('./facebook.strategy');
 require('./local.strategy');
@@ -51,7 +52,7 @@ module.exports = () =>
 
       app.set('views', path.resolve(__dirname, '../views'));
 
-      app.use(session({ secret: 'cats' }));
+      // app.use(session({ secret: 'cats' }));
 
       app.use(flash());
 
@@ -59,6 +60,17 @@ module.exports = () =>
       app.use(bodyParser.urlencoded({ extended: false }));
       // parse application/json
       app.use(bodyParser.json());
+
+      app.use(cookieParser());
+
+      app.use(
+        session({
+          cookie: { httpOnly: true, maxAge: 30 * 40 * 60 * 60 * 1000 },
+          secret: 'S3cret',
+          resave: false,
+          saveUninitialized: false,
+        })
+      );
 
       app.use(passport.initialize());
 
