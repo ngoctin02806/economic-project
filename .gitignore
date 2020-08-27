@@ -5,3 +5,4 @@ logfile.txt
 .idea
 .env
 public/upload/**
+.history
