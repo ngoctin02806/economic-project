@@ -88,8 +88,7 @@ const register = async (req, res, next) => {
     req.flash('oldData', data);
     res.redirect('dang-ky');
   } else {
-    const newUser = await createNewUser(data);
-    console.log(newUser);
+    await createNewUser(data);
 
     passport.authenticate('local', {
       successRedirect: '/',

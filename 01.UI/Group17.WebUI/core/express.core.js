@@ -73,7 +73,6 @@ module.exports = () =>
       );
 
       app.use((req, res, next) => {
-        console.log(req.originalUrl);
         req.session.currentPath = req.originalUrl;
         next();
       });
