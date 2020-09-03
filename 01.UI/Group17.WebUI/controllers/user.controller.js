@@ -16,7 +16,7 @@ const renderLogin = (req, res) => {
 const logout = (req, res) => {
   req.logout();
 
-  res.redirect('/');
+  res.redirect(req.session.currentPath || '/');
 };
 
 const renderRegister = (req, res) => {

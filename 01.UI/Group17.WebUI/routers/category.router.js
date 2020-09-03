@@ -3,7 +3,6 @@ const express = require('express');
 const router = express.Router();
 
 const categoryController = require('../controllers/category.controller');
-const { categoryMiddleware } = require('../middlewares/category.middleware');
 
 router.use((req, res, next) => {
   res.locals.user = req.user;
@@ -11,10 +10,6 @@ router.use((req, res, next) => {
   return next();
 });
 
-router.get(
-  '/category/:id&page=:page',
-  categoryMiddleware,
-  categoryController.category
-);
-router.get('/search/page=:page', categoryMiddleware, categoryController.search);
+router.get('/category/:id&page=:page', categoryController.category);
+router.get('/search/page=:page', categoryController.search);
 module.exports = router;

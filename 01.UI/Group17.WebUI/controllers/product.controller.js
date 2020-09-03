@@ -13,6 +13,8 @@ const renderProductDetail = async (req, res, next) => {
     const { productId } = req.params;
     const { user } = req;
 
+    req.session.previousPath = req.originalUrl;
+
     let value = await getProductById(productId);
 
     if (!value.status) {

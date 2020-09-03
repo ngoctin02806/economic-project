@@ -13,7 +13,7 @@
 <link rel="stylesheet" type="text/css" href="/static/assets/plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
 <link rel="stylesheet" type="text/css" href="/static/assets/plugins/OwlCarousel2-2.2.1/animate.css">
 <link rel="stylesheet" type="text/css" href="/static/assets/plugins/slick-1.8.0/slick.css">
-<link rel="stylesheet" type="text/css" href="/static/assets/plugins/jquery-ui-1.12.1.custom/jquery-ui.css">	
+<link rel="stylesheet" type="text/css" href="/static/assets/plugins/jquery-ui-1.12.1.custom/jquery-ui.css">
 <link rel="stylesheet" type="text/css" href="/static/assets/css/main_styles.css">
 <link rel="stylesheet" type="text/css" href="/static/assets/css/responsive.css">
 <link rel="stylesheet" type="text/css" href="/static/assets/css/customize_styles.css">
@@ -83,6 +83,13 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 {{!-- category --}}
 
 {{{_sections.script}}}
+<script>
+  $(document).ready(function () {
+    $('.product_price').each(function (index, element) {
+      $(element).text($(element).text().toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,') + 'đ')
+    });
+  });
+</script>
 </body>
 
 </html>
